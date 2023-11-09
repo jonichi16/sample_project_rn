@@ -2,5 +2,5 @@ import {User} from '../model/User';
 
 export const userCredentials: User = {
   username: 'jon',
-  password: '12345',
+  password: '1234',
 };

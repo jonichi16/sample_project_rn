@@ -3,21 +3,26 @@ import React, {useState} from 'react';
 import Button from '../../common/components/buttons/Button';
 import {Colors, Spacing, Typography} from '../../common/styles';
 import {userCredentials} from '../data/sampleUser';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Authentication = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const onPress = () => {
+  const onPress = async () => {
     Keyboard.dismiss();
 
     if (
       userCredentials.username === username &&
       userCredentials.password === password
     ) {
-      console.log('authenticated');
       setError('');
+
+      await AsyncStorage.setItem('isLogin', 'true');
+
+      setUsername('');
+      setPassword('');
     } else {
       setError('Invalid username or password');
     }
