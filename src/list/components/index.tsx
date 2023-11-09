@@ -1,7 +1,6 @@
 import {View, Text} from 'react-native';
 import React, {useContext} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Button from '../../common/components/buttons/Button';
 import {AuthContext} from '../../authentication/context/AuthProvider';
 
 const List = () => {
@@ -15,7 +14,6 @@ const List = () => {
   return (
     <View>
       <Text>List</Text>
-      <Button title="Logout" onPress={onPress} />
     </View>
   );
 };
