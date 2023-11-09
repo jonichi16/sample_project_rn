@@ -13,37 +13,37 @@ const Splash = () => {
         Animated.sequence([
           Animated.timing(eyelid, {
             toValue: 8,
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyelid, {
             toValue: -8,
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyelid, {
             toValue: -8,
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyelid, {
             toValue: -14,
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyelid, {
             toValue: 8,
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyelid, {
             toValue: 20,
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyelid, {
             toValue: 0,
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
         ]),
@@ -52,37 +52,37 @@ const Splash = () => {
         Animated.sequence([
           Animated.timing(eyeball, {
             toValue: {x: 0, y: 8},
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyeball, {
             toValue: {x: 0, y: -8},
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyeball, {
             toValue: {x: 0, y: -8},
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyeball, {
             toValue: {x: -14, y: -8},
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyeball, {
             toValue: {x: -20, y: 8},
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyeball, {
             toValue: {x: 0, y: 12},
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
           Animated.timing(eyeball, {
             toValue: {x: 0, y: 0},
-            duration: 400,
+            duration: 350,
             useNativeDriver: true,
           }),
         ]),
