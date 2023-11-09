@@ -17,7 +17,7 @@ const Button = ({title, testID, style, onPress}: ButtonProps) => {
       style={({pressed}) => [
         {
           ...(style || {width: '100%'}),
-          backgroundColor: pressed ? '#f43f5e' : '#e11d48',
+          backgroundColor: pressed ? Colors.primary.p500 : Colors.primary.p600,
           transform: pressed ? [{scale: 0.98}] : [{scale: 1}],
         },
         styles.button,

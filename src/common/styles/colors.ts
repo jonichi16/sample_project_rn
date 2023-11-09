@@ -1,6 +1,6 @@
 export const primary = {
   dark: '#020617',
   light: '#f8fafc',
-  p600: '#e11d48',
-  p500: '#f43f5e',
+  p600: '#059669',
+  p500: '#10b981',
 };
