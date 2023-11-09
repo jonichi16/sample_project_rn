@@ -3,4 +3,6 @@ export const primary = {
   light: '#f8fafc',
   p600: '#059669',
   p500: '#10b981',
+  error: '#e11d48',
+  border: '#4b5563',
 };

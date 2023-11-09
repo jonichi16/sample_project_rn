@@ -1,35 +1,49 @@
-import {Keyboard, StyleSheet, TextInput, View} from 'react-native';
+import {Keyboard, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import Button from '../../common/components/buttons/Button';
-import {Spacing, Typography} from '../../common/styles';
+import {Colors, Spacing, Typography} from '../../common/styles';
+import {userCredentials} from '../data/sampleUser';
 
 const Authentication = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const onPress = () => {
     Keyboard.dismiss();
 
-    if (username && password) {
-      setUsername('');
-      setPassword('');
+    if (
+      userCredentials.username === username &&
+      userCredentials.password === password
+    ) {
+      console.log('authenticated');
+      setError('');
+    } else {
+      setError('Invalid username or password');
     }
   };
 
   return (
     <View style={styles.container}>
+      {error ? <Text style={styles.error}>{error}</Text> : <></>}
       <TextInput
         testID="UsernameInput"
         placeholder="Username"
         value={username}
-        style={styles.input}
+        style={[
+          {borderColor: error ? Colors.primary.error : Colors.primary.border},
+          styles.input,
+        ]}
         onChangeText={setUsername}
       />
       <TextInput
         testID="PasswordInput"
         placeholder="Password"
         value={password}
-        style={styles.input}
+        style={[
+          {borderColor: error ? Colors.primary.error : Colors.primary.border},
+          styles.input,
+        ]}
         onChangeText={setPassword}
         textContentType="password"
         secureTextEntry={true}
@@ -58,5 +72,9 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '50%',
+  },
+  error: {
+    ...Typography.subHeader.md,
+    color: Colors.primary.error,
   },
 });
