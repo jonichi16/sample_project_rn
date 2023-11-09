@@ -8,7 +8,7 @@ export const generateData = (): ListData[] => {
   alphabet.forEach(char => {
     const dataArray: string[] = [];
     for (let i = 1; i <= 100; i += 1) {
-      dataArray.push(`${char.toUpperCase()} letter ${i}`);
+      dataArray.push(`${char.toUpperCase()} - item ${i}`);
     }
     list.push({
       title: char.toUpperCase(),
