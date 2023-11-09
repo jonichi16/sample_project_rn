@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import {jest, describe, it, expect} from '@jest/globals';
+import {describe, it, expect} from '@jest/globals';
 import Authentication from '.';
 
 describe('Authentication Feature', () => {
@@ -22,6 +22,7 @@ describe('Authentication Feature', () => {
 
     expect(passwordInputField.props.placeholder).toEqual('Password');
     expect(passwordInputField.props.value).toEqual('12345');
+    expect(passwordInputField.props.secureTextEntry).toEqual(true);
   });
 
   it('should have button to login', () => {
