@@ -33,7 +33,9 @@ const AuthProvider = ({children}: AuthProviderProps) => {
       } catch (error) {
         console.log(error);
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2800);
       }
     };
 

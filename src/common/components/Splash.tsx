@@ -1,5 +1,6 @@
 import {Animated, StatusBar, StyleSheet, View} from 'react-native';
 import React, {useEffect, useRef} from 'react';
+import {Colors} from '../styles';
 
 const Splash = () => {
   const eyelid = useRef(new Animated.Value(0)).current;
@@ -95,7 +96,7 @@ const Splash = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={'tomato'} barStyle={'default'} />
+      <StatusBar backgroundColor={Colors.primary.p600} barStyle={'default'} />
       <View style={[styles.container, styles.background]}>
         <View style={styles.eye}>
           <Animated.View
@@ -123,14 +124,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   background: {
-    backgroundColor: 'tomato',
+    backgroundColor: Colors.primary.p600,
   },
   eye: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.primary.light,
     width: 100,
     height: 100,
     borderWidth: 10,
-    borderColor: 'black',
+    borderColor: Colors.primary.dark,
     borderRadius: 60,
     overflow: 'hidden',
   },
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'darkslategrey',
     borderBottomWidth: 10,
-    borderColor: 'black',
+    borderColor: Colors.primary.dark,
     position: 'absolute',
     left: 0,
     top: '-50%',
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 30,
     top: 22,
-    backgroundColor: 'black',
+    backgroundColor: Colors.primary.dark,
     borderRadius: 30,
   },
 });

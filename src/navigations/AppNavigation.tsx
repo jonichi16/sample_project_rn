@@ -4,9 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import Authentication from '../authentication/components';
 import List from '../list/components';
 import {AuthContext} from '../authentication/context/AuthProvider';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Button from '../common/components/buttons/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Splash from '../common/components/Splash';
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -28,7 +29,7 @@ const AppNavigation = () => {
   };
 
   if (auth!.isLoading) {
-    return <Text>Loading...</Text>;
+    return <Splash />;
   }
 
   return (
