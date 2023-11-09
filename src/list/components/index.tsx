@@ -30,6 +30,7 @@ const List = () => {
         keyExtractor={(item, index) => item + index}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
+        initialNumToRender={20}
       />
     </View>
   );
