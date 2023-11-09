@@ -1,14 +1,16 @@
 import {Keyboard, StyleSheet, Text, TextInput, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Button from '../../common/components/buttons/Button';
 import {Colors, Spacing, Typography} from '../../common/styles';
 import {userCredentials} from '../data/sampleUser';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AuthContext} from '../context/AuthProvider';
 
 const Authentication = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const auth = useContext(AuthContext);
 
   const onPress = async () => {
     Keyboard.dismiss();
@@ -19,7 +21,9 @@ const Authentication = () => {
     ) {
       setError('');
 
-      await AsyncStorage.setItem('isLogin', 'true');
+      await AsyncStorage.setItem('isLoggedIn', 'true');
+
+      auth!.setIsLoggedIn(true);
 
       setUsername('');
       setPassword('');
