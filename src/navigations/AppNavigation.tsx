@@ -4,10 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import Authentication from '../authentication/components';
 import List from '../list/components';
 import {AuthContext} from '../authentication/context/AuthProvider';
-import {Text} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import Button from '../common/components/buttons/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {fontSize} from '../common/styles/typography';
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -25,7 +24,7 @@ const AppNavigation = () => {
       auth!.setIsLoggedIn(false);
     };
 
-    return <Button title="Logout" style={{width: 'auto'}} onPress={onPress} />;
+    return <Button title="Logout" style={styles.logout} onPress={onPress} />;
   };
 
   if (auth!.isLoading) {
@@ -59,3 +58,9 @@ const AppNavigation = () => {
 };
 
 export default AppNavigation;
+
+const styles = StyleSheet.create({
+  logout: {
+    width: 'auto',
+  },
+});
