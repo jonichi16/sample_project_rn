@@ -40,6 +40,7 @@ const List = ({navigation}: ListProps) => {
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         initialNumToRender={20}
+        stickySectionHeadersEnabled={true}
       />
     </View>
   );

@@ -9,6 +9,7 @@ import Button from '../common/components/buttons/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Splash from '../common/components/Splash';
 import Item from '../item/components';
+import {Spacing} from '../common/styles';
 
 export type RootStackParamList = {
   Auth: undefined;
@@ -36,7 +37,11 @@ const AppNavigation = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          animationTypeForReplace: 'pop',
+          headerTitleAlign: 'center',
+        }}>
         {auth!.isLoggedIn ? (
           <>
             <Stack.Screen
@@ -44,8 +49,6 @@ const AppNavigation = () => {
               component={List}
               options={{
                 title: 'My List',
-                animationTypeForReplace: 'pop',
-                headerTitleAlign: 'center',
                 headerLeft: () => logoutButton(),
               }}
             />
@@ -54,8 +57,6 @@ const AppNavigation = () => {
               component={Item}
               options={{
                 animation: 'slide_from_right',
-                animationTypeForReplace: 'pop',
-                headerTitleAlign: 'center',
               }}
             />
           </>
@@ -76,5 +77,8 @@ export default AppNavigation;
 const styles = StyleSheet.create({
   logout: {
     width: 'auto',
+    marginVertical: 10,
+    paddingVertical: Spacing.spacing.xs,
+    paddingHorizontal: Spacing.spacing.md,
   },
 });
