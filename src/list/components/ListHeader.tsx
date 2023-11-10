@@ -20,7 +20,7 @@ export default ListHeader;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#d9d9d9',
+    backgroundColor: '#B8B8B8',
     padding: Spacing.spacing.sm,
     borderBottomWidth: 1,
   },
