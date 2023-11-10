@@ -16,10 +16,13 @@ const List = ({navigation}: ListProps) => {
     navigation.navigate('Item', {item});
   };
 
-  const renderItem = useCallback(({item}: {item: string}) => {
-    return <ListItem item={item} goToItem={goToItem} />;
+  const renderItem = useCallback(
+    ({item, index}: {item: string; index: number}) => {
+      return <ListItem item={item} index={index} goToItem={goToItem} />;
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    [],
+  );
 
   const renderSectionHeader = useCallback(
     ({section: {title}}: {section: {title: string}}) => {
