@@ -53,6 +53,7 @@ const AppNavigation = () => {
               name="Item"
               component={Item}
               options={{
+                animation: 'slide_from_right',
                 animationTypeForReplace: 'pop',
                 headerTitleAlign: 'center',
               }}
