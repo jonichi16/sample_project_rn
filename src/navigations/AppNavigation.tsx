@@ -8,10 +8,12 @@ import {StyleSheet} from 'react-native';
 import Button from '../common/components/buttons/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Splash from '../common/components/Splash';
+import Item from '../item/components';
 
 export type RootStackParamList = {
   Auth: undefined;
   List: undefined;
+  Item: {item: string};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -36,16 +38,26 @@ const AppNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {auth!.isLoggedIn ? (
-          <Stack.Screen
-            name="List"
-            component={List}
-            options={{
-              title: 'My List',
-              animationTypeForReplace: 'pop',
-              headerTitleAlign: 'center',
-              headerLeft: () => logoutButton(),
-            }}
-          />
+          <>
+            <Stack.Screen
+              name="List"
+              component={List}
+              options={{
+                title: 'My List',
+                animationTypeForReplace: 'pop',
+                headerTitleAlign: 'center',
+                headerLeft: () => logoutButton(),
+              }}
+            />
+            <Stack.Screen
+              name="Item"
+              component={Item}
+              options={{
+                animationTypeForReplace: 'pop',
+                headerTitleAlign: 'center',
+              }}
+            />
+          </>
         ) : (
           <Stack.Screen
             name="Auth"

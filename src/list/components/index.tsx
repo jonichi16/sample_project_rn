@@ -4,16 +4,21 @@ import {ListData} from '../model/ListData';
 import {generateData} from '../data/listData';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../navigations/AppNavigation';
 
-const List = () => {
+type ListProps = NativeStackScreenProps<RootStackParamList, 'List'>;
+
+const List = ({navigation}: ListProps) => {
   const [data, setData] = useState<ListData[]>([]);
 
-  useEffect(() => {
-    setData(generateData());
-  }, []);
+  const goToItem = (item: string) => {
+    navigation.navigate('Item', {item});
+  };
 
   const renderItem = useCallback(({item}: {item: string}) => {
-    return <ListItem item={item} />;
+    return <ListItem item={item} goToItem={goToItem} />;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderSectionHeader = useCallback(
@@ -22,6 +27,10 @@ const List = () => {
     },
     [],
   );
+
+  useEffect(() => {
+    setData(generateData());
+  }, []);
 
   return (
     <View>
