@@ -10,38 +10,101 @@ const BlinkingEye = ({isScrolling}: BlinkingEyeProps) => {
   const eyelid = useRef(new Animated.Value(0)).current;
   const eyeball = useRef(new Animated.ValueXY({x: 0, y: 0})).current;
 
+  // const animationStart = Animated.loop(
+  //   Animated.parallel([
+  //     // Animation for eyelid
+  //     Animated.sequence([
+  //       Animated.timing(eyelid, {
+  //         toValue: 3,
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyelid, {
+  //         toValue: -3,
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyelid, {
+  //         toValue: -9,
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyelid, {
+  //         toValue: 5,
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyelid, {
+  //         toValue: 7,
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyelid, {
+  //         toValue: 0,
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //     ]),
+
+  //     // Animation for eyeball
+  //     Animated.sequence([
+  //       Animated.timing(eyeball, {
+  //         toValue: {x: 0, y: 3},
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyeball, {
+  //         toValue: {x: 0, y: -3},
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyeball, {
+  //         toValue: {x: -7, y: -7},
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyeball, {
+  //         toValue: {x: -11, y: 3},
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyeball, {
+  //         toValue: {x: -3, y: 6},
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //       Animated.timing(eyeball, {
+  //         toValue: {x: 0, y: 0},
+  //         duration: 200,
+  //         useNativeDriver: true,
+  //       }),
+  //     ]),
+  //   ]),
+  //   {iterations: -1},
+  // );
+
   const animationStart = Animated.loop(
     Animated.parallel([
       // Animation for eyelid
       Animated.sequence([
         Animated.timing(eyelid, {
-          toValue: 3,
-          duration: 200,
+          toValue: 13,
+          duration: 500,
           useNativeDriver: true,
         }),
         Animated.timing(eyelid, {
-          toValue: -3,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-        Animated.timing(eyelid, {
-          toValue: -9,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-        Animated.timing(eyelid, {
-          toValue: 5,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-        Animated.timing(eyelid, {
-          toValue: 7,
-          duration: 200,
+          toValue: 13,
+          duration: 300,
           useNativeDriver: true,
         }),
         Animated.timing(eyelid, {
           toValue: 0,
-          duration: 200,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(eyelid, {
+          toValue: 0,
+          duration: 500,
           useNativeDriver: true,
         }),
       ]),
@@ -49,33 +112,23 @@ const BlinkingEye = ({isScrolling}: BlinkingEyeProps) => {
       // Animation for eyeball
       Animated.sequence([
         Animated.timing(eyeball, {
-          toValue: {x: 0, y: 3},
-          duration: 200,
+          toValue: {x: 0, y: 9},
+          duration: 500,
           useNativeDriver: true,
         }),
         Animated.timing(eyeball, {
-          toValue: {x: 0, y: -3},
-          duration: 200,
-          useNativeDriver: true,
-        }),
-        Animated.timing(eyeball, {
-          toValue: {x: -7, y: -7},
-          duration: 200,
-          useNativeDriver: true,
-        }),
-        Animated.timing(eyeball, {
-          toValue: {x: -11, y: 3},
-          duration: 200,
-          useNativeDriver: true,
-        }),
-        Animated.timing(eyeball, {
-          toValue: {x: -3, y: 6},
-          duration: 200,
+          toValue: {x: 0, y: 9},
+          duration: 300,
           useNativeDriver: true,
         }),
         Animated.timing(eyeball, {
           toValue: {x: 0, y: 0},
-          duration: 200,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(eyeball, {
+          toValue: {x: 0, y: 0},
+          duration: 500,
           useNativeDriver: true,
         }),
       ]),
@@ -90,7 +143,7 @@ const BlinkingEye = ({isScrolling}: BlinkingEyeProps) => {
       useNativeDriver: true,
     }),
     Animated.timing(eyeball, {
-      toValue: 0,
+      toValue: {x: 0, y: 0},
       duration: 200,
       useNativeDriver: true,
     }),
@@ -134,15 +187,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary.dark,
     position: 'absolute',
     left: 0,
-    top: '-50%',
+    top: '-60%',
     zIndex: 10,
   },
   eyeball: {
     width: 14,
     height: 14,
     position: 'absolute',
-    left: 15,
-    top: 11,
+    left: 11,
+    top: 8,
     backgroundColor: Colors.primary.dark,
     borderRadius: 30,
   },
