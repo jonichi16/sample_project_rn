@@ -99,7 +99,7 @@ const BlinkingEye = ({isScrolling}: BlinkingEyeProps) => {
         }),
         Animated.timing(eyelid, {
           toValue: 0,
-          duration: 300,
+          duration: 200,
           useNativeDriver: true,
         }),
         Animated.timing(eyelid, {
