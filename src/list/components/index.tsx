@@ -87,7 +87,7 @@ const List = ({navigation}: ListProps) => {
         keyExtractor={item => item}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
-        initialNumToRender={1}
+        initialNumToRender={20}
         stickySectionHeadersEnabled={true}
         onScrollBeginDrag={() => setIsScrolling(true)}
         onScrollEndDrag={() => setIsScrolling(false)}
