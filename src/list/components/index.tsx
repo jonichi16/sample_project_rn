@@ -12,7 +12,7 @@ type ListProps = NativeStackScreenProps<RootStackParamList, 'List'>;
 
 const List = ({navigation}: ListProps) => {
   const [data, setData] = useState<ListData[]>([]);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [isScrolling, setIsScrolling] = useState<boolean>(false);
 
   const goToItem = (item: string) => {
     navigation.navigate('Item', {item});

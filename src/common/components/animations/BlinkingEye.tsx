@@ -150,7 +150,6 @@ const BlinkingEye = ({isScrolling}: BlinkingEyeProps) => {
   ]);
 
   useEffect(() => {
-    console.log(isScrolling);
     isScrolling ? animationStart.start() : animationReset.start();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isScrolling]);

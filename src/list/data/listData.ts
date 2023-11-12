@@ -1,9 +1,9 @@
 import {ListData} from '../model/ListData';
 
+const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
 export const generateData = (): ListData[] => {
   const list: ListData[] = [];
-
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
   alphabet.forEach(char => {
     const dataArray: string[] = [];
