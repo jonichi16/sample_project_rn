@@ -65,7 +65,7 @@ const List = ({navigation}: ListProps) => {
 
   const movingEye = () => (
     <>
-      {/* <BlinkingEye isScrolling={isScrolling} /> */}
+      <BlinkingEye isScrolling={isScrolling} />
       <Text style={styles.function}>{currentFunc}</Text>
     </>
   );
@@ -78,7 +78,7 @@ const List = ({navigation}: ListProps) => {
   useEffect(() => {
     navigation.setOptions({headerRight: movingEye});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentFunc]);
+  }, [isScrolling]);
 
   return (
     <View>
