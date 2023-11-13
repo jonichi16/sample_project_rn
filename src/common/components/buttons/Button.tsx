@@ -18,7 +18,7 @@ const Button = ({title, testID, style, onPress}: ButtonProps) => {
         styles.button,
         {
           ...(style || {width: '100%'}),
-          backgroundColor: pressed ? Colors.primary.p500 : Colors.primary.p600,
+          opacity: pressed ? 0.8 : 1,
           transform: pressed ? [{scale: 0.98}] : [{scale: 1}],
         },
       ]}
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
     padding: Spacing.spacing.sm,
+    backgroundColor: Colors.primary.p600,
   },
   buttonText: {
     ...Typography.header.md,
