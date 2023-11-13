@@ -69,10 +69,7 @@ const List = ({navigation}: ListProps) => {
       setCurrentFunc('');
     }
 
-    if (
-      viewableItems[viewableItems.length - 1].index === 30 &&
-      currentFunc === 'F1'
-    ) {
+    if (viewableItems.find(item => item.index === 30) && currentFunc === 'F1') {
       unloadItem();
     }
   };
