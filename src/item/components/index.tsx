@@ -4,6 +4,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../navigations/AppNavigation';
 import useLorem from '../hooks/useLorem';
 import {Colors, Spacing, Typography} from '../../common/styles';
+import Button from '../../common/components/buttons/Button';
 
 type ItemProps = NativeStackScreenProps<RootStackParamList, 'Item'>;
 
@@ -26,6 +27,16 @@ const Item = ({route, navigation}: ItemProps) => {
   return (
     <View style={styles.container}>
       <Text style={styles.lorem}>{lorem}</Text>
+      <View style={styles.buttons}>
+        <Button
+          title="Take Picture"
+          onPress={() => console.log('Taking picture')}
+        />
+        <Button
+          title="Upload Picture"
+          onPress={() => console.log('Uploading picture')}
+        />
+      </View>
     </View>
   );
 };
@@ -50,5 +61,10 @@ const styles = StyleSheet.create({
   lorem: {
     ...Typography.body.md,
     color: Colors.primary.dark,
+  },
+  buttons: {
+    width: '50%',
+    marginVertical: '10%',
+    gap: Spacing.spacing.md,
   },
 });
