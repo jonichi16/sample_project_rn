@@ -5,11 +5,16 @@ const useLorem = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    const paragraph = Math.ceil(Math.random() * 3);
+
     try {
       const fetchLorem = async () => {
-        const response = await fetch('https://loripsum.net/api/1/medium', {
-          mode: 'cors',
-        });
+        const response = await fetch(
+          `https://loripsum.net/api/${paragraph}/medium`,
+          {
+            mode: 'cors',
+          },
+        );
         const data = await response.text();
 
         const regex = /<\/?p>/g;

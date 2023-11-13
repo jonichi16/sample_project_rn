@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../navigations/AppNavigation';
@@ -28,17 +28,21 @@ const Item = ({route, navigation}: ItemProps) => {
   return (
     <View style={styles.container}>
       <ItemCarousel />
-      <Text style={styles.lorem}>{lorem}</Text>
-      <View style={styles.buttons}>
-        <Button
-          title="Take Picture"
-          onPress={() => console.log('Taking picture')}
-        />
-        <Button
-          title="Upload Picture"
-          onPress={() => console.log('Uploading picture')}
-        />
-      </View>
+      <ScrollView>
+        <View style={styles.scrollContainer}>
+          <Text style={styles.lorem}>{lorem}</Text>
+          <View style={styles.buttons}>
+            <Button
+              title="Take Picture"
+              onPress={() => console.log('Taking picture')}
+            />
+            <Button
+              title="Upload Picture"
+              onPress={() => console.log('Uploading picture')}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -50,6 +54,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: Spacing.spacing.md,
+    gap: Spacing.spacing.md,
+  },
+  scrollContainer: {
+    flex: 1,
+    alignItems: 'center',
+    padding: Spacing.spacing.sm,
+    gap: Spacing.spacing.sm,
   },
   loadingContainer: {
     flex: 1,
@@ -63,10 +74,10 @@ const styles = StyleSheet.create({
   lorem: {
     ...Typography.body.md,
     color: Colors.primary.dark,
-    marginVertical: '10%',
   },
   buttons: {
     width: '50%',
     gap: Spacing.spacing.md,
+    marginBottom: Spacing.spacing.sm,
   },
 });
