@@ -14,6 +14,7 @@ type ListProps = NativeStackScreenProps<RootStackParamList, 'List'>;
 
 const List = ({navigation}: ListProps) => {
   const [data, setData] = useState<ListData[]>([]);
+  const [isLast, setIsLast] = useState<boolean>(false);
   const [currentFunc, setCurrentFunc] = useState<string>('');
   const [lastItemIndex, setLastItemIndex] = useState<number>(0);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
@@ -63,6 +64,19 @@ const List = ({navigation}: ListProps) => {
     // setIsDataProcessing(false);
   }, [currentFunc, lastItemIndex]);
 
+  const onViewItemsChangeHandler = ({viewableItems}) => {
+    if (viewableItems[viewableItems.length - 1].item === 'A - item 16') {
+      setCurrentFunc('');
+    }
+
+    if (
+      viewableItems[viewableItems.length - 1].index === 30 &&
+      currentFunc === 'F1'
+    ) {
+      unloadItem();
+    }
+  };
+
   const movingEye = () => (
     <>
       <BlinkingEye isScrolling={isScrolling} />
@@ -74,6 +88,10 @@ const List = ({navigation}: ListProps) => {
     setData(generateData(0));
     setLastItemIndex(prevState => prevState + 1);
   }, []);
+
+  useEffect(() => {
+    setIsLast(data.length === 26);
+  }, [data]);
 
   useEffect(() => {
     navigation.setOptions({headerRight: movingEye});
@@ -93,9 +111,13 @@ const List = ({navigation}: ListProps) => {
         onScrollEndDrag={() => setIsScrolling(false)}
         onEndReachedThreshold={0.5}
         onEndReached={loadMoreItem}
-        onStartReachedThreshold={0.5 * lastItemIndex}
-        onStartReached={unloadItem}
-        ListFooterComponent={<DataProcessing />}
+        // onStartReachedThreshold={0.5 * lastItemIndex + 1}
+        // onStartReached={unloadItem}
+        maxToRenderPerBatch={15}
+        onViewableItemsChanged={onViewItemsChangeHandler}
+        windowSize={100}
+        initialScrollIndex={0}
+        ListFooterComponent={<DataProcessing isLast={isLast} />}
       />
     </View>
   );

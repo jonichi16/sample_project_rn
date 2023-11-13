@@ -2,10 +2,18 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Spacing, Typography} from '../../common/styles';
 
-const DataProcessing = () => {
+type DataProcessingProps = {
+  isLast: boolean;
+};
+
+const DataProcessing = ({isLast}: DataProcessingProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Processing Data...</Text>
+      {isLast ? (
+        <Text style={styles.text}>End of List</Text>
+      ) : (
+        <Text style={styles.text}>Processing Data...</Text>
+      )}
     </View>
   );
 };
