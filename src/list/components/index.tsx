@@ -65,13 +65,16 @@ const List = ({navigation}: ListProps) => {
   }, [currentFunc, lastItemIndex]);
 
   const onViewItemsChangeHandler = ({viewableItems}) => {
-    if (viewableItems[viewableItems.length - 1].item === 'A - item 16') {
+    if (
+      viewableItems[viewableItems.length - 1] &&
+      viewableItems[viewableItems.length - 1].item === 'A - item 16'
+    ) {
       setCurrentFunc('');
     }
 
-    if (viewableItems.find(item => item.index === 30) && currentFunc === 'F1') {
-      unloadItem();
-    }
+    // if (viewableItems.find(item => item.index === 30) && currentFunc === 'F1') {
+    //   unloadItem();
+    // }
   };
 
   const movingEye = () => (
