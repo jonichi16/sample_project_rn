@@ -5,6 +5,7 @@ import {RootStackParamList} from '../../navigations/AppNavigation';
 import useLorem from '../hooks/useLorem';
 import {Colors, Spacing, Typography} from '../../common/styles';
 import Button from '../../common/components/buttons/Button';
+import ItemCarousel from './ItemCarousel';
 
 type ItemProps = NativeStackScreenProps<RootStackParamList, 'Item'>;
 
@@ -26,6 +27,7 @@ const Item = ({route, navigation}: ItemProps) => {
 
   return (
     <View style={styles.container}>
+      <ItemCarousel />
       <Text style={styles.lorem}>{lorem}</Text>
       <View style={styles.buttons}>
         <Button
@@ -61,10 +63,10 @@ const styles = StyleSheet.create({
   lorem: {
     ...Typography.body.md,
     color: Colors.primary.dark,
+    marginVertical: '10%',
   },
   buttons: {
     width: '50%',
-    marginVertical: '10%',
     gap: Spacing.spacing.md,
   },
 });
