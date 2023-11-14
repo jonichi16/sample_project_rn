@@ -43,8 +43,9 @@ const ItemButtons = ({disabled, addPicture}: ItemButtonsProps) => {
         onPress={() => {
           launchImageLibrary(
             {
-              selectionLimit: 0,
+              selectionLimit: 1,
               mediaType: 'photo',
+              presentationStyle: 'fullScreen',
               includeBase64: false,
             },
             handlePicture,
