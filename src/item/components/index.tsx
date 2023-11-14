@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.spacing.md,
   },
   scrollContainer: {
+    width: '100%',
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: Spacing.spacing.sm,

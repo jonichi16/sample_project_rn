@@ -26,6 +26,7 @@ const ItemButtons = ({disabled, addPicture}: ItemButtonsProps) => {
       <Button
         title="Take Picture"
         disabled={disabled}
+        style={styles.button}
         onPress={() => {
           launchCamera(
             {
@@ -40,6 +41,7 @@ const ItemButtons = ({disabled, addPicture}: ItemButtonsProps) => {
       <Button
         title="Upload Picture"
         disabled={disabled}
+        style={styles.button}
         onPress={() => {
           launchImageLibrary(
             {
@@ -60,8 +62,12 @@ export default ItemButtons;
 
 const styles = StyleSheet.create({
   buttons: {
-    width: '50%',
+    width: '100%',
+    alignItems: 'center',
     gap: Spacing.spacing.md,
     marginBottom: Spacing.spacing.sm,
+  },
+  button: {
+    width: '50%',
   },
 });

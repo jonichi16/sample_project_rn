@@ -107,7 +107,8 @@ const List = ({navigation}: ListProps) => {
 
   useEffect(() => {
     navigation.setOptions({headerRight: movingEye});
-  }, [isScrolling, currentFunc, data, navigation, movingEye]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isScrolling, currentFunc, data]);
 
   return (
     <View>
