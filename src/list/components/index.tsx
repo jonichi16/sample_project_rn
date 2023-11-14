@@ -16,7 +16,6 @@ const List = ({navigation}: ListProps) => {
   const [data, setData] = useState<ListData[]>([]);
   const [isLast, setIsLast] = useState<boolean>(false);
   const [currentFunc, setCurrentFunc] = useState<string>('');
-  const [lastItemIndex, setLastItemIndex] = useState<number>(0);
   const [isScrolling, setIsScrolling] = useState<boolean>(false);
 
   const goToItem = useCallback(
@@ -41,28 +40,23 @@ const List = ({navigation}: ListProps) => {
   );
 
   const loadMoreItem = useCallback(() => {
-    const newData = generateData(lastItemIndex, 1);
+    const newData = generateData(data.length, 1);
 
     setData(prevState => {
       return [...prevState, ...newData];
     });
 
-    setLastItemIndex(prevState => prevState + 1);
     setCurrentFunc('F1');
-  }, [lastItemIndex]);
+  }, [data.length]);
 
   const unloadItem = useCallback(() => {
-    if (currentFunc === 'F1') {
-      setLastItemIndex(prevState => prevState - 1);
+    setData(prevState => {
+      return prevState.splice(0, data.length - 1);
+    });
 
-      setData(prevState => {
-        return prevState.splice(0, lastItemIndex - 1);
-      });
-
-      setCurrentFunc('F2');
-    }
+    setCurrentFunc('F2');
     // setIsDataProcessing(false);
-  }, [currentFunc, lastItemIndex]);
+  }, [data.length]);
 
   const onViewItemsChangeHandler = ({viewableItems}: any) => {
     if (
@@ -77,20 +71,18 @@ const List = ({navigation}: ListProps) => {
     (event: any) => {
       if (
         event.nativeEvent.velocity?.y > 0 &&
-        event.nativeEvent.contentOffset.y >= 3320 * (data.length - 1)
+        event.nativeEvent.contentOffset.y >= 4500 * (data.length - 1) - 900
       ) {
         console.log('F1');
         loadMoreItem();
       } else if (
         event.nativeEvent.velocity?.y < 0 &&
-        event.nativeEvent.contentOffset.y <= 1200 * data.length &&
+        event.nativeEvent.contentOffset.y <= 2500 * (data.length - 2) - 900 &&
         currentFunc !== ''
       ) {
         console.log('F2');
         unloadItem();
       }
-
-      console.log(event.nativeEvent.velocity.y);
     },
     [currentFunc, data.length, loadMoreItem, unloadItem],
   );
@@ -104,7 +96,6 @@ const List = ({navigation}: ListProps) => {
 
   useEffect(() => {
     setData(generateData(0, 2));
-    setLastItemIndex(prevState => prevState + 2);
   }, []);
 
   useEffect(() => {
