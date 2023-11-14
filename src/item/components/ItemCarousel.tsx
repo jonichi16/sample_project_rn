@@ -6,9 +6,10 @@ import {CarouselImage} from '../model/CarouselImage';
 
 type ItemCarouselProps = {
   images: CarouselImage[];
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const ItemCarousel = ({images}: ItemCarouselProps) => {
+const ItemCarousel = ({images, setCurrentIndex}: ItemCarouselProps) => {
   const width = Dimensions.get('window').width;
 
   const renderItem = useCallback(({item}: {item: {image: any}}) => {
@@ -20,7 +21,7 @@ const ItemCarousel = ({images}: ItemCarouselProps) => {
       width={width}
       height={width / 2}
       data={images}
-      onSnapToItem={index => console.log(index)}
+      onSnapToItem={index => setCurrentIndex(index)}
       mode="parallax"
       modeConfig={{
         parallaxScrollingOffset: 140,

@@ -1,43 +1,24 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../navigations/AppNavigation';
 import useLorem from '../hooks/useLorem';
 import {Colors, Spacing, Typography} from '../../common/styles';
 import ItemCarousel from './ItemCarousel';
 import ItemButtons from './ItemButtons';
-import ImageService from '../services/images';
-import {CarouselImage} from '../model/CarouselImage';
+import useImage from '../hooks/useImage';
 
 type ItemProps = NativeStackScreenProps<RootStackParamList, 'Item'>;
 
 const Item = ({route, navigation}: ItemProps) => {
   const {item} = route.params;
   const {lorem, isLoading} = useLorem();
-  const [images, setImages] = useState<CarouselImage[]>([]);
+  const {images, setCurrenIndex, addPicture} = useImage(item);
 
-  const addPicture = useCallback(
-    (uri: string) => {
-      const newImage = ImageService.addImage(item, uri);
-
-      setImages(prevState => [newImage, ...prevState]);
-    },
-    [item],
-  );
-
-  // set the title in the header
+  // set the title of the header after render
   useEffect(() => {
     navigation.setOptions({title: item});
   }, [item, navigation]);
-
-  // initialize images in the carousel when screen is rendered
-  useEffect(() => {
-    const initImages = ImageService.getImages().filter(
-      image => image.item === item || image.item === 'all',
-    );
-
-    setImages(prevState => [...prevState, ...initImages]);
-  }, [item]);
 
   if (isLoading) {
     return (
@@ -49,7 +30,7 @@ const Item = ({route, navigation}: ItemProps) => {
 
   return (
     <View style={styles.container}>
-      <ItemCarousel images={images} />
+      <ItemCarousel images={images} setCurrentIndex={setCurrenIndex} />
       <ScrollView>
         <View style={styles.scrollContainer}>
           <Text style={styles.lorem}>{lorem}</Text>

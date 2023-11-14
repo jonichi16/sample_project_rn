@@ -29,7 +29,7 @@ const addImage = (item: string, uri: string): CarouselImage => {
     image: {uri: uri},
   };
 
-  images = [newImage, ...images];
+  images = [...images, newImage];
 
   return newImage;
 };
