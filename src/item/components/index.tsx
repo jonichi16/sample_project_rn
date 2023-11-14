@@ -30,7 +30,9 @@ const Item = ({route, navigation}: ItemProps) => {
 
   return (
     <View style={styles.container}>
-      <ItemCarousel images={images} setCurrentIndex={setCurrenIndex} />
+      <View style={styles.carousel}>
+        <ItemCarousel images={images} setCurrentIndex={setCurrenIndex} />
+      </View>
       <ScrollView>
         <View style={styles.scrollContainer}>
           <Text style={styles.lorem}>{lorem}</Text>
@@ -50,10 +52,13 @@ const styles = StyleSheet.create({
     padding: Spacing.spacing.md,
     gap: Spacing.spacing.md,
   },
+  carousel: {
+    marginBottom: Spacing.spacing.md,
+  },
   scrollContainer: {
     flex: 1,
     alignItems: 'center',
-    padding: Spacing.spacing.sm,
+    paddingHorizontal: Spacing.spacing.sm,
     gap: Spacing.spacing.sm,
   },
   loadingContainer: {
@@ -68,6 +73,5 @@ const styles = StyleSheet.create({
   lorem: {
     ...Typography.body.md,
     color: Colors.primary.dark,
-    marginTop: Spacing.spacing.md,
   },
 });
