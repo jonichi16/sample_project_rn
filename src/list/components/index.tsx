@@ -84,14 +84,17 @@ const List = ({navigation}: ListProps) => {
     [currentFunc, data.length, loadMoreItem, unloadItem],
   );
 
-  const movingEye = () => (
-    <>
-      {/* <BlinkingEye isScrolling={isScrolling} /> */}
-      <Text style={styles.function}>
-        {currentFunc ? currentFunc + ' - ' : ''}
-        {data.length}
-      </Text>
-    </>
+  const movingEye = useCallback(
+    () => (
+      <>
+        <BlinkingEye isScrolling={isScrolling} />
+        <Text style={styles.function}>
+          {currentFunc ? currentFunc + ' - ' : ''}
+          {data.length}
+        </Text>
+      </>
+    ),
+    [currentFunc, data.length, isScrolling],
   );
 
   useEffect(() => {
@@ -104,8 +107,7 @@ const List = ({navigation}: ListProps) => {
 
   useEffect(() => {
     navigation.setOptions({headerRight: movingEye});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isScrolling, currentFunc, data]);
+  }, [isScrolling, currentFunc, data, navigation, movingEye]);
 
   return (
     <View>
@@ -116,8 +118,8 @@ const List = ({navigation}: ListProps) => {
         renderSectionHeader={renderSectionHeader}
         initialNumToRender={20}
         stickySectionHeadersEnabled={true}
-        // onScrollBeginDrag={() => setIsScrolling(true)}
-        // onScrollEndDrag={() => setIsScrolling(false)}
+        onScrollBeginDrag={() => setIsScrolling(true)}
+        onScrollEndDrag={() => setIsScrolling(false)}
         onScroll={onScrollHandler}
         maxToRenderPerBatch={15}
         onViewableItemsChanged={onViewItemsChangeHandler}
