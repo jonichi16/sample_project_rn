@@ -24,9 +24,9 @@ const ItemCarousel = ({images, setCurrentIndex}: ItemCarouselProps) => {
       onSnapToItem={index => setCurrentIndex(index)}
       mode="parallax"
       modeConfig={{
-        parallaxScrollingOffset: 70,
+        parallaxScrollingOffset: 90,
         parallaxScrollingScale: 1,
-        parallaxAdjacentItemScale: 0.9,
+        parallaxAdjacentItemScale: 0.8,
       }}
       renderItem={renderItem}
     />
