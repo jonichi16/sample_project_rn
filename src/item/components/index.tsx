@@ -25,10 +25,12 @@ const Item = ({route, navigation}: ItemProps) => {
     [item],
   );
 
+  // set the title in the header
   useEffect(() => {
     navigation.setOptions({title: item});
   }, [item, navigation]);
 
+  // initialize images in the carousel when screen is rendered
   useEffect(() => {
     const initImages = ImageService.getImages().filter(
       image => image.item === item || image.item === 'all',
