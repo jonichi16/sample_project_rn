@@ -17,6 +17,9 @@ alphabet.forEach(char => {
   });
 });
 
-export const generateData = (index: number): ListData[] => {
-  return list.slice(index, index + 1);
+export const generateData = (
+  index: number,
+  numberOfSection: number,
+): ListData[] => {
+  return list.slice(index, index + numberOfSection);
 };

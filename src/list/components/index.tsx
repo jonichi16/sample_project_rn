@@ -41,7 +41,7 @@ const List = ({navigation}: ListProps) => {
   );
 
   const loadMoreItem = useCallback(() => {
-    const newData = generateData(lastItemIndex);
+    const newData = generateData(lastItemIndex, 1);
 
     setData(prevState => {
       return [...prevState, ...newData];
@@ -56,7 +56,7 @@ const List = ({navigation}: ListProps) => {
       setLastItemIndex(prevState => prevState - 1);
 
       setData(prevState => {
-        return prevState.slice(0, lastItemIndex - 1);
+        return prevState.splice(0, lastItemIndex - 1);
       });
 
       setCurrentFunc('F2');
@@ -64,39 +64,59 @@ const List = ({navigation}: ListProps) => {
     // setIsDataProcessing(false);
   }, [currentFunc, lastItemIndex]);
 
-  const onViewItemsChangeHandler = ({viewableItems}) => {
+  const onViewItemsChangeHandler = ({viewableItems}: any) => {
     if (
       viewableItems[viewableItems.length - 1] &&
       viewableItems[viewableItems.length - 1].item === 'A - item 16'
     ) {
       setCurrentFunc('');
     }
-
-    // if (viewableItems.find(item => item.index === 30) && currentFunc === 'F1') {
-    //   unloadItem();
-    // }
   };
+
+  const onScrollHandler = useCallback(
+    (event: any) => {
+      if (
+        event.nativeEvent.velocity?.y > 0 &&
+        event.nativeEvent.contentOffset.y >= 3320 * (data.length - 1)
+      ) {
+        console.log('F1');
+        loadMoreItem();
+      } else if (
+        event.nativeEvent.velocity?.y < 0 &&
+        event.nativeEvent.contentOffset.y <= 1200 * data.length &&
+        currentFunc !== ''
+      ) {
+        console.log('F2');
+        unloadItem();
+      }
+
+      console.log(event.nativeEvent.velocity.y);
+    },
+    [currentFunc, data.length, loadMoreItem, unloadItem],
+  );
 
   const movingEye = () => (
     <>
-      <BlinkingEye isScrolling={isScrolling} />
+      {/* <BlinkingEye isScrolling={isScrolling} /> */}
       <Text style={styles.function}>{currentFunc}</Text>
     </>
   );
 
   useEffect(() => {
-    setData(generateData(0));
-    setLastItemIndex(prevState => prevState + 1);
+    setData(generateData(0, 2));
+    setLastItemIndex(prevState => prevState + 2);
   }, []);
 
   useEffect(() => {
     setIsLast(data.length === 26);
+    console.log(data.length);
+    // console.log(data[data.length - 1]);
   }, [data]);
 
   useEffect(() => {
     navigation.setOptions({headerRight: movingEye});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isScrolling]);
+  }, [isScrolling, currentFunc]);
 
   return (
     <View>
@@ -107,12 +127,13 @@ const List = ({navigation}: ListProps) => {
         renderSectionHeader={renderSectionHeader}
         initialNumToRender={20}
         stickySectionHeadersEnabled={true}
-        onScrollBeginDrag={() => setIsScrolling(true)}
-        onScrollEndDrag={() => setIsScrolling(false)}
-        onEndReachedThreshold={0.5}
-        onEndReached={loadMoreItem}
-        // onStartReachedThreshold={0.5 * lastItemIndex + 1}
+        // onScrollBeginDrag={() => setIsScrolling(true)}
+        // onScrollEndDrag={() => setIsScrolling(false)}
+        // onEndReachedThreshold={currentFunc === 'F1' ? 9 : 7}
+        // onEndReached={currentFunc === 'F1' ? unloadItem : loadMoreItem}
+        // onStartReachedThreshold={5}
         // onStartReached={unloadItem}
+        onScroll={onScrollHandler}
         maxToRenderPerBatch={15}
         onViewableItemsChanged={onViewItemsChangeHandler}
         windowSize={100}
