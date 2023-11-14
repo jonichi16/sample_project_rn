@@ -2,9 +2,13 @@ import {Dimensions} from 'react-native';
 import React, {useCallback} from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import ItemImage from './ItemImage';
-import {images} from '../data/images';
+import {CarouselImage} from '../model/CarouselImage';
 
-const ItemCarousel = () => {
+type ItemCarouselProps = {
+  images: CarouselImage[];
+};
+
+const ItemCarousel = ({images}: ItemCarouselProps) => {
   const width = Dimensions.get('window').width;
 
   const renderItem = useCallback(({item}: {item: {image: any}}) => {

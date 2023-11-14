@@ -1,15 +1,24 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback} from 'react';
 import {Spacing} from '../../common/styles';
 import Button from '../../common/components/buttons/Button';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-const ItemButtons = () => {
-  const [response, setResponse] = useState<any>(null);
+type ItemButtonsProps = {
+  addPicture: (uri: string) => void;
+};
 
-  useEffect(() => {
-    console.log(response);
-  }, [response]);
+const ItemButtons = ({addPicture}: ItemButtonsProps) => {
+  const handlePicture = useCallback(
+    (response: any) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else {
+        addPicture(response.assets![0].uri!);
+      }
+    },
+    [addPicture],
+  );
 
   return (
     <View style={styles.buttons}>
@@ -22,7 +31,7 @@ const ItemButtons = () => {
               mediaType: 'photo',
               includeBase64: false,
             },
-            setResponse,
+            handlePicture,
           );
         }}
       />
@@ -35,7 +44,7 @@ const ItemButtons = () => {
               mediaType: 'photo',
               includeBase64: false,
             },
-            setResponse,
+            handlePicture,
           );
         }}
       />

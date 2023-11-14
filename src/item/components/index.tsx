@@ -1,21 +1,40 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../navigations/AppNavigation';
 import useLorem from '../hooks/useLorem';
 import {Colors, Spacing, Typography} from '../../common/styles';
 import ItemCarousel from './ItemCarousel';
 import ItemButtons from './ItemButtons';
+import ImageService from '../services/images';
+import {CarouselImage} from '../model/CarouselImage';
 
 type ItemProps = NativeStackScreenProps<RootStackParamList, 'Item'>;
 
 const Item = ({route, navigation}: ItemProps) => {
   const {item} = route.params;
   const {lorem, isLoading} = useLorem();
+  const [images, setImages] = useState<CarouselImage[]>([]);
+
+  const addPicture = useCallback((uri: string) => {
+    const newImage = ImageService.addImage(uri);
+
+    setImages(prevState => [newImage, ...prevState]);
+  }, []);
+
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
 
   useEffect(() => {
     navigation.setOptions({title: item});
   }, [item, navigation]);
+
+  useEffect(() => {
+    const initImages = ImageService.getImages();
+
+    setImages(prevState => [...prevState, ...initImages]);
+  }, []);
 
   if (isLoading) {
     return (
@@ -27,11 +46,11 @@ const Item = ({route, navigation}: ItemProps) => {
 
   return (
     <View style={styles.container}>
-      <ItemCarousel />
+      <ItemCarousel images={images} />
       <ScrollView>
         <View style={styles.scrollContainer}>
           <Text style={styles.lorem}>{lorem}</Text>
-          <ItemButtons />
+          <ItemButtons addPicture={addPicture} />
         </View>
       </ScrollView>
     </View>
