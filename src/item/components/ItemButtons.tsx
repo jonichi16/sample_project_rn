@@ -5,10 +5,11 @@ import Button from '../../common/components/buttons/Button';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 type ItemButtonsProps = {
+  disabled: boolean;
   addPicture: (uri: string) => void;
 };
 
-const ItemButtons = ({addPicture}: ItemButtonsProps) => {
+const ItemButtons = ({disabled, addPicture}: ItemButtonsProps) => {
   const handlePicture = useCallback(
     (response: any) => {
       if (response.didCancel) {
@@ -24,6 +25,7 @@ const ItemButtons = ({addPicture}: ItemButtonsProps) => {
     <View style={styles.buttons}>
       <Button
         title="Take Picture"
+        disabled={disabled}
         onPress={() => {
           launchCamera(
             {
@@ -37,6 +39,7 @@ const ItemButtons = ({addPicture}: ItemButtonsProps) => {
       />
       <Button
         title="Upload Picture"
+        disabled={disabled}
         onPress={() => {
           launchImageLibrary(
             {

@@ -55,7 +55,7 @@ const Item = ({route, navigation}: ItemProps) => {
       <ScrollView>
         <View style={styles.scrollContainer}>
           <Text style={styles.lorem}>{lorem}</Text>
-          <ItemButtons addPicture={addPicture} />
+          <ItemButtons disabled={images.length > 4} addPicture={addPicture} />
         </View>
       </ScrollView>
     </View>
