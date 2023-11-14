@@ -16,11 +16,14 @@ const Item = ({route, navigation}: ItemProps) => {
   const {lorem, isLoading} = useLorem();
   const [images, setImages] = useState<CarouselImage[]>([]);
 
-  const addPicture = useCallback((uri: string) => {
-    const newImage = ImageService.addImage(uri);
+  const addPicture = useCallback(
+    (uri: string) => {
+      const newImage = ImageService.addImage(item, uri);
 
-    setImages(prevState => [newImage, ...prevState]);
-  }, []);
+      setImages(prevState => [newImage, ...prevState]);
+    },
+    [item],
+  );
 
   useEffect(() => {
     console.log(images);
@@ -31,10 +34,12 @@ const Item = ({route, navigation}: ItemProps) => {
   }, [item, navigation]);
 
   useEffect(() => {
-    const initImages = ImageService.getImages();
+    const initImages = ImageService.getImages().filter(
+      image => image.item === item || image.item === 'all',
+    );
 
     setImages(prevState => [...prevState, ...initImages]);
-  }, []);
+  }, [item]);
 
   if (isLoading) {
     return (
