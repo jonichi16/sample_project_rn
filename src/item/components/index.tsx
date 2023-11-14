@@ -68,5 +68,6 @@ const styles = StyleSheet.create({
   lorem: {
     ...Typography.body.md,
     color: Colors.primary.dark,
+    marginTop: Spacing.spacing.md,
   },
 });
