@@ -26,10 +26,6 @@ const Item = ({route, navigation}: ItemProps) => {
   );
 
   useEffect(() => {
-    console.log(images);
-  }, [images]);
-
-  useEffect(() => {
     navigation.setOptions({title: item});
   }, [item, navigation]);
 
