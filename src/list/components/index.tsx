@@ -55,7 +55,6 @@ const List = ({navigation}: ListProps) => {
     });
 
     setCurrentFunc('F2');
-    // setIsDataProcessing(false);
   }, [data.length]);
 
   const onViewItemsChangeHandler = ({viewableItems}: any) => {
@@ -71,16 +70,14 @@ const List = ({navigation}: ListProps) => {
     (event: any) => {
       if (
         event.nativeEvent.velocity?.y > 0 &&
-        event.nativeEvent.contentOffset.y >= 4500 * (data.length - 1) - 900
+        event.nativeEvent.contentOffset.y >= 4700 * (data.length - 1) - 1500
       ) {
-        console.log('F1');
         loadMoreItem();
       } else if (
         event.nativeEvent.velocity?.y < 0 &&
-        event.nativeEvent.contentOffset.y <= 2500 * (data.length - 2) - 900 &&
+        event.nativeEvent.contentOffset.y <= 4700 * (data.length - 2) - 3770 &&
         currentFunc !== ''
       ) {
-        console.log('F2');
         unloadItem();
       }
     },
@@ -90,7 +87,10 @@ const List = ({navigation}: ListProps) => {
   const movingEye = () => (
     <>
       {/* <BlinkingEye isScrolling={isScrolling} /> */}
-      <Text style={styles.function}>{currentFunc}</Text>
+      <Text style={styles.function}>
+        {currentFunc ? currentFunc + ' - ' : ''}
+        {data.length}
+      </Text>
     </>
   );
 
@@ -100,14 +100,12 @@ const List = ({navigation}: ListProps) => {
 
   useEffect(() => {
     setIsLast(data.length === 26);
-    console.log(data.length);
-    // console.log(data[data.length - 1]);
   }, [data]);
 
   useEffect(() => {
     navigation.setOptions({headerRight: movingEye});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isScrolling, currentFunc]);
+  }, [isScrolling, currentFunc, data]);
 
   return (
     <View>
@@ -120,10 +118,6 @@ const List = ({navigation}: ListProps) => {
         stickySectionHeadersEnabled={true}
         // onScrollBeginDrag={() => setIsScrolling(true)}
         // onScrollEndDrag={() => setIsScrolling(false)}
-        // onEndReachedThreshold={currentFunc === 'F1' ? 9 : 7}
-        // onEndReached={currentFunc === 'F1' ? unloadItem : loadMoreItem}
-        // onStartReachedThreshold={5}
-        // onStartReached={unloadItem}
         onScroll={onScrollHandler}
         maxToRenderPerBatch={15}
         onViewableItemsChanged={onViewItemsChangeHandler}
